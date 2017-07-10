@@ -11,10 +11,10 @@ public class LoadClasses {
 
 	public void loadJar() throws NoSuchMethodException, SecurityException, MalformedURLException{
 		
-		// ÏµÍ³Àà¿âÂ·¾¶  
-		File libPath = new File("jarÎÄ¼şËùÔÚÂ·¾¶");  
+		// ç³»ç»Ÿç±»åº“è·¯å¾„  
+		File libPath = new File("jaræ–‡ä»¶æ‰€åœ¨è·¯å¾„");  
 		  
-		// »ñÈ¡ËùÓĞµÄ.jarºÍ.zipÎÄ¼ş  
+		// è·å–æ‰€æœ‰çš„.jarå’Œ.zipæ–‡ä»¶  
 		File[] jarFiles = libPath.listFiles(new FilenameFilter() {  
 		    public boolean accept(File dir, String name) {  
 		        return name.endsWith(".jar") || name.endsWith(".zip");  
@@ -22,23 +22,23 @@ public class LoadClasses {
 		});  
 		  
 		if (jarFiles != null) {  
-		    // ´ÓURLClassLoaderÀàÖĞ»ñÈ¡ÀàËùÔÚÎÄ¼ş¼ĞµÄ·½·¨  
-		    // ¶ÔÓÚjarÎÄ¼ş£¬¿ÉÒÔÀí½âÎªÒ»¸ö´æ·ÅclassÎÄ¼şµÄÎÄ¼ş¼Ğ  
+		    // ä»URLClassLoaderç±»ä¸­è·å–ç±»æ‰€åœ¨æ–‡ä»¶å¤¹çš„æ–¹æ³•  
+		    // å¯¹äºjaræ–‡ä»¶ï¼Œå¯ä»¥ç†è§£ä¸ºä¸€ä¸ªå­˜æ”¾classæ–‡ä»¶çš„æ–‡ä»¶å¤¹  
 		    Method method = URLClassLoader.class.getDeclaredMethod("addURL", URL.class);  
-		    boolean accessible = method.isAccessible();     // »ñÈ¡·½·¨µÄ·ÃÎÊÈ¨ÏŞ  
+		    boolean accessible = method.isAccessible();     // è·å–æ–¹æ³•çš„è®¿é—®æƒé™  
 		    try {  
 		        if (accessible == false) {  
-		            method.setAccessible(true);     // ÉèÖÃ·½·¨µÄ·ÃÎÊÈ¨ÏŞ  
+		            method.setAccessible(true);     // è®¾ç½®æ–¹æ³•çš„è®¿é—®æƒé™  
 		        }  
-		        // »ñÈ¡ÏµÍ³Àà¼ÓÔØÆ÷  
+		        // è·å–ç³»ç»Ÿç±»åŠ è½½å™¨  
 		        URLClassLoader classLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();  
 		        for (File file : jarFiles) {  
 		            URL url = file.toURI().toURL();  
 		            try {  
 		                method.invoke(classLoader, url);    
-		                //LOG.debug("¶ÁÈ¡jarÎÄ¼ş[name={}]", file.getName());  
+		                //LOG.debug("è¯»å–jaræ–‡ä»¶[name={}]", file.getName());  
 		            } catch (Exception e) {  
-		                //LOG.error("¶ÁÈ¡jarÎÄ¼ş[name={}]Ê§°Ü", file.getName());  
+		                //LOG.error("è¯»å–jaræ–‡ä»¶[name={}]å¤±è´¥", file.getName());  
 		            }  
 		        }  
 		    } finally {  
