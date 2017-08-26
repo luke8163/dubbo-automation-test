@@ -26,5 +26,8 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-aop')
 	compile('org.springframework.boot:spring-boot-starter-validation')
 	compile('org.springframework.boot:spring-boot-starter-web')
+    compile 'com.google.code.gson:gson:2.8.0'
+    compile("org.apache.commons:commons-lang3:3.1")
+    compile("xstream:xstream:1.2.2")
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
